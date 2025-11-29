@@ -1,13 +1,21 @@
 #include <npc_factory/npc_factory.hpp>
 
+#include <iostream>
 #include <memory>
 
 #include <NPCs/Brigand.hpp>
 #include <NPCs/NPC.hpp>
+#include <NPCs/NPCFormatting.hpp>
 #include <NPCs/Orc.hpp>
 #include <NPCs/Werewolf.hpp>
 
 namespace npc_factory {
+
+const std::string kOrcName = "Orc";
+const std::string kBrigandName = "Brigand";
+const std::string kWerewolfName = "Werewolf";
+const std::string kUnknownName = "Unknown npc";
+
 NPCFactory::NPCFactory() : loader_(nullptr) {}
 NPCFactory::NPCFactory(std::unique_ptr<npc_loader::NPCLoader> &&loader)
     : loader_(std::move(loader)) {}
@@ -51,4 +59,12 @@ NPCFactory::GetNPCs() const {
 }
 void NPCFactory::Save() { loader_->Save(npcs_); }
 void NPCFactory::Load() { npcs_ = loader_->Load(); }
+void NPCFactory::Print() const {
+  for (auto &[name, npc] : npcs_) {
+    auto coords = npc->GetCoords();
+    std::cout << "NPC type: " << npcs::GetTypename(npc)
+              << " Name: " << npc->GetName() << " Coordinates: (" << coords.x
+              << ", " << coords.y << ")\n";
+  }
+}
 }; // namespace npc_factory

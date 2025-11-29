@@ -1,2 +1,2 @@
 add_library(text_file_loader_lib text_file_loader.cpp)
-target_link_libraries(text_file_loader_lib Orc_lib Werewolf_lib Brigand_lib)
+target_link_libraries(text_file_loader_lib npc_formatting_lib Orc_lib Werewolf_lib Brigand_lib)
