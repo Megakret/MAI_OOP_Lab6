@@ -8,11 +8,11 @@ namespace npcs {
 class Orc : public NPC {
 public:
   Orc(const std::string &name, Point location);
-  bool Fight(const NPC &opponent) override;
+  bool Fight(const NPC &opponent) const override;
   bool AcceptFight(const fight_system::fight_visitors::FightVisitor
-                       &initiator_visitor) override;
+                       &initiator_visitor) const override;
 
 private:
-  //fight_system::fight_visitors::OrcFightVisitor fight_visitor_;
+  fight_system::fight_visitors::OrcFightVisitor fight_visitor_;
 };
 }; // namespace npcs

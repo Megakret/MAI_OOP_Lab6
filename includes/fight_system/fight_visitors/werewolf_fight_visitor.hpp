@@ -4,9 +4,9 @@
 
 namespace fight_system {
 namespace fight_visitors {
-class OrcFightVisitor : public FightVisitor {
+class WerewolfFightVisitor : public FightVisitor {
 public:
-  OrcFightVisitor();
+  WerewolfFightVisitor();
   bool Fight(const npcs::Orc &orc) const override;
   bool Fight(const npcs::Brigand &brigand) const override;
   bool Fight(const npcs::Werewolf &werewolf) const override;

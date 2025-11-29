@@ -6,8 +6,9 @@ class NPCFactoryTest : public ::testing::Test {
 protected:
   npc_factory::NPCFactory factory_;
 };
+const float kPrecision = 1e-5;
 bool ComparePoints(npcs::Point a, npcs::Point b) {
-  return a.x == b.x && a.y == b.y;
+	return std::abs(a.x - b.x) <= kPrecision && std::abs(a.y - b.y) <= kPrecision;
 }
 TEST_F(NPCFactoryTest, OrcCreationTest) {
   factory_.CreateOrc("Rookie", {0, 0});
@@ -47,4 +48,18 @@ TEST_F(NPCFactoryTest, NPCDoesntExistException) {
   factory_.CreateOrc("Rookie", {0, 0});
   EXPECT_THROW(factory_.RemoveNPC("Noone"),
                npc_factory::NPCDoesntExistException);
+}
+TEST_F(NPCFactoryTest, DifferentMobs) {
+  factory_.CreateOrc("Orc", {0, 0});
+  factory_.CreateBrigand("Brigand", {1, 1});
+  factory_.CreateWerewolf("Werewolf", {2, 2});
+
+  auto npcs = factory_.GetNPCs();
+  auto orc = npcs["Orc"];
+  auto brigand = npcs["Brigand"];
+  auto werewolf = npcs["Werewolf"];
+
+  EXPECT_EQ(orc->GetName(), "Orc");
+  EXPECT_EQ(brigand->GetName(), "Brigand");
+  EXPECT_EQ(werewolf->GetName(), "Werewolf");
 }

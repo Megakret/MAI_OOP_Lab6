@@ -1,13 +1,14 @@
-#include <NPCs/Orc.hpp>
+#include <NPCs/Brigand.hpp>
 
 #include <NPCs/NPC.hpp>
 
 namespace npcs {
-Orc::Orc(const std::string &name, Point location) : NPC(name, location) {}
-bool Orc::Fight(const NPC &opponent) const {
+Brigand::Brigand(const std::string &name, Point location)
+    : NPC(name, location) {}
+bool Brigand::Fight(const NPC &opponent) const {
   return opponent.AcceptFight(fight_visitor_);
 }
-bool Orc::AcceptFight(
+bool Brigand::AcceptFight(
     const fight_system::fight_visitors::FightVisitor &initiator_visitor) const {
   return initiator_visitor.Fight(*this);
 }

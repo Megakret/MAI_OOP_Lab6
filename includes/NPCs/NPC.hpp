@@ -5,12 +5,13 @@
 
 namespace npcs {
 struct Point {
-  int x;
-  int y;
+  float x;
+  float y;
 	friend bool operator==(const Point& p1, const Point& p2){
 		return p1.x == p2.x && p1.y == p2.y;
 	}
 };
+float Distance(Point a, Point b);
 
 class NPC {
 public:
@@ -18,9 +19,9 @@ public:
   Point GetCoords() const;
   std::string_view GetName() const;
   // Returns true if the instance won
-  virtual bool Fight(const NPC &opponent) = 0;
+  virtual bool Fight(const NPC &opponent) const = 0;
   virtual bool AcceptFight(
-      const fight_system::fight_visitors::FightVisitor &initiator_visitor) = 0;
+      const fight_system::fight_visitors::FightVisitor &initiator_visitor) const = 0;
 	virtual ~NPC();
 
 private:

@@ -1,0 +1,8 @@
+add_subdirectory(fight_visitors)
+add_subdirectory(fight_observers)
+add_library(fight_manager_lib fight_manager.cpp)
+target_link_libraries(fight_manager_lib NPCFactory_lib)
+target_include_directories(fight_manager_lib PUBLIC ${INCLUDES})
+
+add_executable(fight_manager_test fight_manager_test.cpp)
+target_link_libraries(fight_manager_test fight_manager_lib in_memory_observer_lib GTest::gtest_main)
