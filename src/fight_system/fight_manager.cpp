@@ -6,6 +6,7 @@
 #include <fight_system/fight_observers/fight_observer.hpp>
 
 namespace fight_system {
+
 FightManager::FightManager(const npc_factory::NPCFactory &factory)
     : factory_(factory) {}
 FightManager::FightManager(

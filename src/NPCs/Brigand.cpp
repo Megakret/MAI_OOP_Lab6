@@ -3,6 +3,7 @@
 #include <NPCs/NPC.hpp>
 
 namespace npcs {
+
 Brigand::Brigand(const std::string &name, Point location)
     : NPC(name, location) {}
 bool Brigand::Fight(const NPC &opponent) const {

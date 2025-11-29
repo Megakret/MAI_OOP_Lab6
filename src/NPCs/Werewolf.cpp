@@ -1,9 +1,9 @@
 #include <NPCs/Werewolf.hpp>
 
 #include <NPCs/NPC.hpp>
-#include <fight_system/fight_visitors/fight_visitor.hpp>
 
 namespace npcs {
+
 Werewolf::Werewolf(const std::string &name, Point location)
     : NPC(name, location) {}
 bool Werewolf::Fight(const NPC &opponent) const {

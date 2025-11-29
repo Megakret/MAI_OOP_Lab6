@@ -1,6 +1,7 @@
 #include <fight_system/fight_observers/in_memory_observer.hpp>
 
 namespace fight_system::fight_observers {
+
 void InMemoryObserver::OnDefeat(const npcs::NPC &winner,
                                 const npcs::NPC &loser) {
   results_.push_back(

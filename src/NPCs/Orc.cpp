@@ -3,6 +3,7 @@
 #include <NPCs/NPC.hpp>
 
 namespace npcs {
+
 Orc::Orc(const std::string &name, Point location) : NPC(name, location) {}
 bool Orc::Fight(const NPC &opponent) const {
   return opponent.AcceptFight(fight_visitor_);
