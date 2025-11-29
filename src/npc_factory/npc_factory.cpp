@@ -2,12 +2,15 @@
 
 #include <memory>
 
+#include <NPCs/Brigand.hpp>
 #include <NPCs/NPC.hpp>
 #include <NPCs/Orc.hpp>
 #include <NPCs/Werewolf.hpp>
-#include <NPCs/Brigand.hpp>
 
 namespace npc_factory {
+NPCFactory::NPCFactory() : loader_(nullptr) {}
+NPCFactory::NPCFactory(std::unique_ptr<npc_loader::NPCLoader> &&loader)
+    : loader_(std::move(loader)) {}
 std::shared_ptr<npcs::Orc> NPCFactory::CreateOrc(const std::string &name,
                                                  npcs::Point coords) {
   if (npcs_.find(name) != npcs_.end()) {
@@ -17,8 +20,8 @@ std::shared_ptr<npcs::Orc> NPCFactory::CreateOrc(const std::string &name,
   npcs_[name] = orc;
   return orc;
 }
-std::shared_ptr<npcs::Brigand> NPCFactory::CreateBrigand(const std::string &name,
-                                                 npcs::Point coords) {
+std::shared_ptr<npcs::Brigand>
+NPCFactory::CreateBrigand(const std::string &name, npcs::Point coords) {
   if (npcs_.find(name) != npcs_.end()) {
     throw UniqueNameException(name);
   }
@@ -26,8 +29,8 @@ std::shared_ptr<npcs::Brigand> NPCFactory::CreateBrigand(const std::string &name
   npcs_[name] = brigand;
   return brigand;
 }
-std::shared_ptr<npcs::Werewolf> NPCFactory::CreateWerewolf(const std::string &name,
-                                                 npcs::Point coords) {
+std::shared_ptr<npcs::Werewolf>
+NPCFactory::CreateWerewolf(const std::string &name, npcs::Point coords) {
   if (npcs_.find(name) != npcs_.end()) {
     throw UniqueNameException(name);
   }
@@ -46,4 +49,6 @@ const std::map<std::string, std::shared_ptr<npcs::NPC>> &
 NPCFactory::GetNPCs() const {
   return npcs_;
 }
+void NPCFactory::Save() { loader_->Save(npcs_); }
+void NPCFactory::Load() { npcs_ = loader_->Load(); }
 }; // namespace npc_factory

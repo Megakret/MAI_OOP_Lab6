@@ -3,10 +3,11 @@
 #include <map>
 #include <memory>
 
-#include <NPCs/NPC.hpp>
 #include <NPCs/Brigand.hpp>
+#include <NPCs/NPC.hpp>
 #include <NPCs/Orc.hpp>
 #include <NPCs/Werewolf.hpp>
+#include <NPCLoader/NPCLoader.hpp>
 
 namespace npc_factory {
 
@@ -24,9 +25,14 @@ public:
 
 class NPCFactory {
 public:
-	std::shared_ptr<npcs::Orc> CreateOrc(const std::string &name, npcs::Point coordinates);
-  std::shared_ptr<npcs::Brigand> CreateBrigand(const std::string &name, npcs::Point coordinates);
-  std::shared_ptr<npcs::Werewolf> CreateWerewolf(const std::string &name, npcs::Point coordinates);
+	NPCFactory();
+	NPCFactory(std::unique_ptr<npc_loader::NPCLoader>&& loader);
+  std::shared_ptr<npcs::Orc> CreateOrc(const std::string &name,
+                                       npcs::Point coordinates);
+  std::shared_ptr<npcs::Brigand> CreateBrigand(const std::string &name,
+                                               npcs::Point coordinates);
+  std::shared_ptr<npcs::Werewolf> CreateWerewolf(const std::string &name,
+                                                 npcs::Point coordinates);
 
   void RemoveNPC(const std::string &name);
 
@@ -39,5 +45,6 @@ public:
 
 private:
   std::map<std::string, std::shared_ptr<npcs::NPC>> npcs_;
+	std::unique_ptr<npc_loader::NPCLoader> loader_;
 };
 } // namespace npc_factory

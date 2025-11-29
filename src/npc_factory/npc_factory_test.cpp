@@ -1,10 +1,17 @@
 #include <gtest/gtest.h>
 
 #include <npc_factory/npc_factory.hpp>
+#include <NPCLoader/text_file_loader.hpp>
 
 class NPCFactoryTest : public ::testing::Test {
 protected:
   npc_factory::NPCFactory factory_;
+};
+class NPCLoadingTest: public ::testing::Test{
+protected:
+	NPCLoadingTest(): factory1_(std::make_unique<npc_loader::TextFileLoader>("test.txt")),factory2_(std::make_unique<npc_loader::TextFileLoader>("test.txt")) {}
+npc_factory::NPCFactory factory1_;
+npc_factory::NPCFactory factory2_;
 };
 const float kPrecision = 1e-5;
 bool ComparePoints(npcs::Point a, npcs::Point b) {
@@ -62,4 +69,21 @@ TEST_F(NPCFactoryTest, DifferentMobs) {
   EXPECT_EQ(orc->GetName(), "Orc");
   EXPECT_EQ(brigand->GetName(), "Brigand");
   EXPECT_EQ(werewolf->GetName(), "Werewolf");
+}
+
+TEST_F(NPCLoadingTest, SaveAndLoad){
+	factory1_.CreateOrc("Orc", {0,0});
+	factory1_.CreateBrigand("Brigand", {0,0});
+	factory1_.CreateWerewolf("Werewolf", {0,0});
+
+	factory1_.Save();
+	factory2_.Load();
+	auto factory1_npcs = factory1_.GetNPCs();
+	auto factory2_npcs = factory2_.GetNPCs();
+	for(auto&[name, npc]: factory1_npcs){
+		auto npc2 = factory2_npcs[name];
+		EXPECT_EQ(npc->GetName(), npc2->GetName());
+		ComparePoints(npc->GetCoords(), npc2->GetCoords());
+		EXPECT_EQ(typeid(npc.get()), typeid(npc2.get()));
+	}
 }
