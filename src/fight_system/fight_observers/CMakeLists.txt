@@ -1,2 +1,8 @@
 add_library(in_memory_observer_lib in_memory_observer.cpp)
 target_link_libraries(in_memory_observer_lib NPC_lib)
+
+add_library(cout_observer_lib cout_observer.cpp)
+target_link_libraries(cout_observer_lib NPC_lib)
+
+add_library(log_observer_lib log_observer.cpp)
+target_link_libraries(log_observer_lib NPC_lib)
