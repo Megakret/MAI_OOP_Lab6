@@ -23,6 +23,11 @@ public:
       : std::invalid_argument("NPC with name: " + name + " doesnt exist") {}
 };
 
+class WrongFormatException: std::invalid_argument{
+public:
+	WrongFormatException(const std::string &name): std::invalid_argument("Name: " + name + " must contain only english letters"){}
+};
+
 class NPCFactory {
 public:
 	NPCFactory();

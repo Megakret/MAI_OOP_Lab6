@@ -19,20 +19,20 @@ bool ComparePoints(npcs::Point a, npcs::Point b) {
 }
 TEST_F(NPCFactoryTest, OrcCreationTest) {
   factory_.CreateOrc("Rookie", {0, 0});
-  factory_.CreateOrc("Sergeant orc", {1, 1});
-  factory_.CreateOrc("Leader orc", {2, 2});
+  factory_.CreateOrc("SergeantOrc", {1, 1});
+  factory_.CreateOrc("LeaderOrc", {2, 2});
 
   auto npcs = factory_.GetNPCs();
   auto rookie(npcs["Rookie"]);
-  auto sergeant(npcs["Sergeant orc"]);
-  auto leader(npcs["Leader orc"]);
+  auto sergeant(npcs["SergeantOrc"]);
+  auto leader(npcs["LeaderOrc"]);
   EXPECT_EQ(rookie->GetName(), "Rookie");
   EXPECT_TRUE(ComparePoints(rookie->GetCoords(), {0, 0}));
 
-  EXPECT_EQ(sergeant->GetName(), "Sergeant orc");
+  EXPECT_EQ(sergeant->GetName(), "SergeantOrc");
   EXPECT_TRUE(ComparePoints(sergeant->GetCoords(), {1, 1}));
 
-  EXPECT_EQ(leader->GetName(), "Leader orc");
+  EXPECT_EQ(leader->GetName(), "LeaderOrc");
   EXPECT_TRUE(ComparePoints(leader->GetCoords(), {2, 2}));
 }
 

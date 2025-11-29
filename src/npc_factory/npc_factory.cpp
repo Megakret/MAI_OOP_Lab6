@@ -15,12 +15,22 @@ const std::string kOrcName = "Orc";
 const std::string kBrigandName = "Brigand";
 const std::string kWerewolfName = "Werewolf";
 const std::string kUnknownName = "Unknown npc";
-
+bool ValidateName(const std::string &name) {
+  for (char c : name) {
+    if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))) {
+      return false;
+    }
+  }
+  return true;
+}
 NPCFactory::NPCFactory() : loader_(nullptr) {}
 NPCFactory::NPCFactory(std::unique_ptr<npc_loader::NPCLoader> &&loader)
     : loader_(std::move(loader)) {}
 std::shared_ptr<npcs::Orc> NPCFactory::CreateOrc(const std::string &name,
                                                  npcs::Point coords) {
+	if(!ValidateName(name)){
+		throw WrongFormatException(name);
+	}
   if (npcs_.find(name) != npcs_.end()) {
     throw UniqueNameException(name);
   }
@@ -30,6 +40,9 @@ std::shared_ptr<npcs::Orc> NPCFactory::CreateOrc(const std::string &name,
 }
 std::shared_ptr<npcs::Brigand>
 NPCFactory::CreateBrigand(const std::string &name, npcs::Point coords) {
+	if(!ValidateName(name)){
+		throw WrongFormatException(name);
+	}
   if (npcs_.find(name) != npcs_.end()) {
     throw UniqueNameException(name);
   }
@@ -39,6 +52,9 @@ NPCFactory::CreateBrigand(const std::string &name, npcs::Point coords) {
 }
 std::shared_ptr<npcs::Werewolf>
 NPCFactory::CreateWerewolf(const std::string &name, npcs::Point coords) {
+	if(!ValidateName(name)){
+		throw WrongFormatException(name);
+	}
   if (npcs_.find(name) != npcs_.end()) {
     throw UniqueNameException(name);
   }

@@ -1,7 +1,8 @@
+#include <fight_system/fight_visitors/brigand_fight_visitor.hpp>
+
 #include <NPCs/Brigand.hpp>
 #include <NPCs/Orc.hpp>
 #include <NPCs/Werewolf.hpp>
-#include <fight_system/fight_visitors/brigand_fight_visitor.hpp>
 
 namespace fight_system::fight_visitors {
 BrigandFightVisitor::BrigandFightVisitor() = default;

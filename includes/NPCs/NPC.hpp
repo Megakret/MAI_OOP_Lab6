@@ -1,7 +1,8 @@
 #pragma once
 
-#include <fight_system/fight_visitors/fight_visitor.hpp>
 #include <string>
+
+#include <fight_system/fight_visitors/fight_visitor.hpp>
 
 namespace npcs {
 struct Point {
@@ -11,6 +12,7 @@ struct Point {
 		return p1.x == p2.x && p1.y == p2.y;
 	}
 };
+
 float Distance(Point a, Point b);
 
 class NPC {

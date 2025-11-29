@@ -4,9 +4,8 @@
 
 #include <fight_system/fight_observers/fight_observer.hpp>
 
-namespace fight_system {
-namespace fight_observers{
-class InMemoryObserver : public FightObserver{
+namespace fight_system::fight_observers {
+class InMemoryObserver : public FightObserver {
 public:
   struct FightResult {
     std::string winner_name;
@@ -16,10 +15,8 @@ public:
   std::string_view GetWinner(std::size_t idx) const;
   std::string_view GetLoser(std::size_t idx) const;
   std::size_t GetLength() const;
-	~InMemoryObserver();
 
 private:
   std::vector<FightResult> results_;
 };
-} // namespace defeat_observers
-} // namespace fight_system
+} // namespace fight_system::fight_observers

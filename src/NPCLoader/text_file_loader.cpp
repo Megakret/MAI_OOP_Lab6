@@ -18,7 +18,7 @@ void TextFileLoader::Save(
   for (auto &[name, npc] : npc_tracker) {
     std::string type_name(npcs::GetTypename(npc));
     auto coords = npc->GetCoords();
-    file << type_name << " \"" << npc->GetName() << "\" " << coords.x << ' '
+    file << type_name << ' ' << npc->GetName() << ' ' << coords.x << ' '
          << coords.y << '\n';
   }
 }
