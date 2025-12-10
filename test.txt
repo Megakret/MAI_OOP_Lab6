@@ -1,0 +1,3 @@
+Brigand Brigand 0 0
+Orc Orc 0 0
+Werewolf Werewolf 0 0
